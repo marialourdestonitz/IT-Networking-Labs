@@ -1,0 +1,39 @@
+# Static Routing Lab Exercise
+
+## Lab Objectives
+1. Configure Gigabit Ethernet (Gi0/0) interfaces on all routers with IP addresses matching their designated roles.
+2. Set up Gi0/1 and Gi0/2 interfaces on routers as per the network topology.
+3. Implement static routing to ensure full connectivity between all PCs (PC1, PC2, PC3, PC4).
+4. Validate configurations using `show ip route` and `show ip protocols`.
+
+## Network Topology
+
+### Devices and IP Addressing
+| Device   | Interface | IP Address       | Subnet Mask     |
+|----------|-----------|------------------|-----------------|
+| Router1  | Gi0/0     | 10.41.11.1       | 255.255.255.0   |
+| Router2  | Gi0/0     | 10.41.22.1       | 255.255.255.0   |
+| Router3  | Gi0/0     | 10.41.33.1       | 255.255.255.0   |
+| PC1      | NIC       | 10.41.11.5       | 255.255.255.0   |
+| PC2      | NIC       | 10.41.22.5       | 255.255.255.0   |
+
+### Key Connections
+- **Router1** ↔ **Router2** (Gi0/1 ↔ Gi0/1)
+- **Router2** ↔ **Router3** (Gi0/2 ↔ Gi0/2)
+- **Router1** ↔ **PC1** (Gi0/0 ↔ Switch)
+- **Router2** ↔ **PC2** (Gi0/0 ↔ Switch)
+
+---
+
+## Configuration Steps
+
+### 1. Router Interface Configuration
+**Router1**:
+```cisco
+Router> enable
+Router# configure terminal
+Router(config)# hostname Router1
+Router1(config)# interface GigabitEthernet0/0
+Router1(config-if)# ip address 10.41.11.1 255.255.255.0
+Router1(config-if)# no shutdown
+Router1(config-if)# exit
